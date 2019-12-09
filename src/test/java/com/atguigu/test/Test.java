@@ -1,7 +1,9 @@
 package com.atguigu.test;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
+import com.atguigu.bean.Person;
 import com.atguigu.config.MySpringConfig;
 import com.atguigu.config.MySpringConfigScope;
 
@@ -11,6 +13,22 @@ import com.atguigu.config.MySpringConfigScope;
  * 
  */
 public class Test {
+	
+	AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(MySpringConfig.class);
+	
+	@org.junit.Test
+	public void test03(){
+		String[] beanNamesForType = applicationContext.getBeanNamesForType(Person.class);
+		ConfigurableEnvironment environment = applicationContext.getEnvironment();
+		String property = environment.getProperty("os.name");
+		System.out.println(property);
+		
+		for (String name : beanNamesForType) {
+			System.out.println(name);
+		}
+
+			
+	}
 	
 	@org.junit.Test
 	public void test02(){
